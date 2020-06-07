@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+		<title>Guess my number</title>
+		        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
+        <script
+          src="https://code.jquery.com/jquery-3.5.1.min.js"
+          integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
+          crossorigin="anonymous">
+        </script>
+        <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
+<!--		EXTERNAL CSS -->
+<!--		load Montserrat font from Google fonts-->
+		<link href="https://fonts.googleapis.com/css?family=Montserrat:600,900" rel="stylesheet">
+<!--		load icon images from font awesome-->
+		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+		
+<!--		Our own CSS -->
+		<link rel="stylesheet" href="guess.css">
+		
+
+    </head>
+    <body>
+     <div class="ui right fixed vertical menu">
+       <div class="item">
+        <img src="https://www.codeninjas.com/assets/img/brands/codeNinjas/code-ninjas-logo.png">
+      </div>
+      <a href="semantic.html" class="item">Home <i class="home icon"></i></a>
+      <a class="item">About <i class="user circle outline icon"></i></a>
+      <a href="guess.html" class="item active">Games <i class="gamepad icon"></i></a>
+    </div>
+	
+<!--		HTML for game-->
+		<div id="mainBox">
+			<p>Can you guess my number?</p>
+			<div id="interactive">
+				<input id="guess" type="number" min="1" max="100">
+				<i id="hand" class="fas fa-hand-point-left" onclick="compare()"><span>click<br>me!</span></i>
+			</div>
+			<div id="feedback" onclick="restart()">
+				<p>
+					<span id="response1"></span><br><span id="response2"></span>
+				</p>
+			</div>
+		</div>
+<!--		JavaScript for game goes here-->
+		<script type="text/javascript">
+            
+            var secretNumber = Math.round(Math.random()*100);
+            
+            document.getElementById("response1").innerHTML = "Make a guess!";
+            
+            function compare() {
+                document.getElementById("response1").innerHTML = "Your guess is:";
+                var guess = document.getElementById("guess").value;
+                if (guess == secretNumber) {
+                    document.getElementById("response2").innerHTML = "CORRECT!";
+                    document.getElementById("feedback").style.backgroundColor = "green";
+                } else if (guess > secretNumber) {
+                    document.getElementById("response2").innerHTML = "TOO HIGH!";
+                    document.getElementById("feedback").style.backgroundColor = "rgba(255, 0, 0," + secretNumber / guess + ")";
+                } else {
+                    document.getElementById("response2").innerHTML = "TOO LOW!";
+                    document.getElementById("feedback").style.backgroundColor = "rgba(0, 0, 255," + guess / secretNumber + ")";
+                }
+            }
+            
+            function restart() {
+                secretNumber = Math.round(Math.random()*100);
+                document.getElementById("response1").innerHTML = "Make a guess!";
+                document.getElementById("response2").innerHTML = "New Game Started";
+            }
+            
+            
+		</script>
+	</body>
+</html>
